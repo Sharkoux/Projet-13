@@ -59,7 +59,7 @@ function Nav() {
                     <i className="fa fa-sign-out"></i>
                     Sign Out
                 </NavLink>
-                </div>
+            </div>
                 : <div>
                     <NavLink className="a main-nav-item" to='/login'>
                         <i className="fa fa-user-circle"></i>
