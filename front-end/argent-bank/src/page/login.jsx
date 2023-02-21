@@ -2,8 +2,9 @@ import { Link } from "react-router-dom"
 import React from "react"
 import styled from 'styled-components'
 import { useState } from "react"
-import useLoginUser from "../hook/useLoginUser"
-
+import { useDispatch, useSelector } from "react-redux"
+import { ActionCreators } from "../actions/actionCreator"
+import { connect } from 'react-redux';
 
 
 const SignInContent = styled.section`
@@ -51,31 +52,55 @@ margin-bottom: 500px;
 
 function Login() {
 
-    const [username, setUserName] = useState("");
-    const [password, setPassword] = useState("");
+  const [email, setMail] = useState("");
+  const [password, setPassword] = useState("");
 
-  
-    return (
-        <SignInContent>
-            <i className="fa fa-user-circle sign-in-icon"></i>
-            <h1>Sign In</h1>
-            <form>
-                <div className="input-wrapper">
-                    <label className="label" for="username">Username</label><input className="input" type="text" id="username" onChange={e => setUserName(e.target.value)} />
-                </div>
-                <div className="input-wrapper">
-                    <label className="label" for="password">Password</label><input className="input" type="password" id="password" onChange={e => setPassword(e.target.value)} />
-                </div>
-                <div className="input-remember">
-                    <input className="input" type="checkbox" id="remember-me" /><label className="label" for="remember-me">Remember me</label>
-                </div>
+  const { isConnected } = useSelector(state => state.isConnected)
 
-                <Link to="/user" className="sign-in-button">Sign In</Link>
-            </form>
-        </SignInContent>
-    )
+  const dispatch = useDispatch()
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+    if (email && password) {
+      dispatch(ActionCreators.login({email, password}))
+        .then((response) => {
+          console.log(response)
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    }
+  }
+
+  return (
+    <SignInContent>
+      <i className="fa fa-user-circle sign-in-icon"></i>
+      <h1>Sign In</h1>
+      <form >
+        <div className="input-wrapper">
+          <label className="label" >Username</label><input className="input" type="text" id="username" onChange={e => setMail(e.target.value)} />
+        </div>
+        <div className="input-wrapper">
+          <label className="label" >Password</label><input className="input" type="password" id="password" onChange={e => setPassword(e.target.value)} />
+        </div>
+        <div className="input-remember">
+          <input className="input" type="checkbox" id="remember-me" /><label className="label" >Remember me</label>
+        </div>
+
+        <Link onClick={handleLogin} className="sign-in-button">Sign In</Link>
+      </form>
+    </SignInContent>
+  )
 
 
 }
 
-export default Login
+
+
+const mapDispatchToProps = dispatch => ({
+  login: (credentials) => {
+    dispatch(ActionCreators.login(credentials));
+  }
+});
+
+export default connect(null, mapDispatchToProps)(Login);

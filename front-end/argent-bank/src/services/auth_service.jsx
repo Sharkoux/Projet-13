@@ -1,4 +1,4 @@
-import API from '../API/Api'
+import API from './Api'
 
 const login = (username, password) => {
     return API.post('/login', {username, password})
