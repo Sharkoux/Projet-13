@@ -30,9 +30,9 @@ function FeatureItem({ data }) {
             <img
                 src={data.src}
                 alt="Chat Icon"
-                class="feature-icon"
+                className="feature-icon"
             />
-            <h3 class="feature-item-title">{data.title}</h3>
+            <h3 className="feature-item-title">{data.title}</h3>
             <p>
                 {data.content}
             </p>

@@ -55,14 +55,14 @@ function Login() {
   const [email, setMail] = useState("");
   const [password, setPassword] = useState("");
 
-  const { isConnected } = useSelector(state => state.isConnected)
+  const isConnected = useSelector(state => state.isConnected)
 
   const dispatch = useDispatch()
 
   const handleLogin = (e) => {
     e.preventDefault();
     if (email && password) {
-      dispatch(ActionCreators.login({email, password}))
+      dispatch(ActionCreators.login({ email, password }))
         .then((response) => {
           console.log(response)
         })
@@ -71,6 +71,8 @@ function Login() {
         })
     }
   }
+
+  console.log(isConnected)
 
   return (
     <SignInContent>

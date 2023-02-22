@@ -7,8 +7,9 @@ export const ActionCreators = {
     return async (dispatch) => {
       try {
         const response = await API.post('login', credentials);
-        const token = response.data.token;
-        console.log(response)
+        const data = await response.json();
+        const token = data.body.token
+        console.log(token)
         dispatch({ type: Types.LOGIN, payload: { token } });
       } catch (error) {
         // handle error

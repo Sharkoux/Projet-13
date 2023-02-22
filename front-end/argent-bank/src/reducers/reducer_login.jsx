@@ -12,13 +12,13 @@ const initialState = {
 const reducer_login = (state = initialState, action) => {
     switch (action.type) {
         case Types.LOGIN:
-                return {
-                    ...state,
-                    token: action.payload.token,
-                    isConnected: true
+            return {
+                ...state,
+                token: action.payload.token,
+                isConnected: true
             }
-    default:
-      return state;
+        default:
+            return state;
     }
 }
 
