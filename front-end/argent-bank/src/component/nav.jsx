@@ -38,7 +38,7 @@ const MainNav = styled.nav`
 
 function Nav() {
 
-    const user = "toto"
+    const user = localStorage.getItem("user")
 
     return (
         <MainNav className="main-nav">
@@ -50,8 +50,8 @@ function Nav() {
                 />
                 <h1 className="sr-only">Argent Bank</h1>
             </NavLink>
-            {!user ? <div>
-                <NavLink className="a main-nav-item" href="./user.html">
+            {user ? <div>
+                <NavLink className="a main-nav-item" to='/login'>
                     <i className="fa fa-user-circle"></i>
                     Tony
                 </NavLink>

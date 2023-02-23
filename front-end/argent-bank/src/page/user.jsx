@@ -27,10 +27,10 @@ function User() {
                 <button className="edit-button">Edit Name</button>
             </Header>
 
-            <h2 class="sr-only">Accounts</h2>
+            <h2 className="sr-only">Accounts</h2>
             {datatest.map((item, index) => {
                 return (
-                    <AccountItem data={item} />
+                    <AccountItem data={item} key={index} />
                 )
             })}
 

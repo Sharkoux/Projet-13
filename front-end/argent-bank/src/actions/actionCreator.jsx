@@ -8,13 +8,16 @@ export const ActionCreators = {
       try {
         const response = await API.post('login', credentials);
         const data = await response.json();
-        const token = data.body.token
-        console.log(token)
+        const token = data.body.token;
+        localStorage.setItem("user", JSON.stringify(token));
         dispatch({ type: Types.LOGIN, payload: { token } });
       } catch (error) {
         // handle error
         console.log(error)
       }
     };
+  },
+  logout: () => {
+
   }
 };

@@ -5,6 +5,7 @@ import { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { ActionCreators } from "../actions/actionCreator"
 import { connect } from 'react-redux';
+import User from "./user"
 
 
 const SignInContent = styled.section`
@@ -72,7 +73,10 @@ function Login() {
     }
   }
 
-  console.log(isConnected)
+  if(isConnected) {
+    return <User />
+  }
+
 
   return (
     <SignInContent>
