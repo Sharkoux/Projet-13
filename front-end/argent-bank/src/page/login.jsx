@@ -5,8 +5,8 @@ import { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { ActionCreators } from "../actions/actionCreator"
 import { connect } from 'react-redux';
+import { Navigate } from "react-router-dom"
 import User from "./user"
-
 
 const SignInContent = styled.section`
 box-sizing: border-box;
@@ -43,6 +43,9 @@ margin-bottom: 500px;
     padding: 5px;
     font-size: 1.2rem;
   }
+  .input-error {
+    color: red
+  }
 
 `
 
@@ -55,27 +58,29 @@ function Login() {
 
   const [email, setMail] = useState("");
   const [password, setPassword] = useState("");
+  const [check, setCheck] = useState(false)
 
   const isConnected = useSelector(state => state.isConnected)
+  const error = useSelector(state => state.error)
+
 
   const dispatch = useDispatch()
 
   const handleLogin = (e) => {
     e.preventDefault();
-    if (email && password) {
-      dispatch(ActionCreators.login({ email, password }))
-        .then((response) => {
-          console.log(response)
-        })
-        .catch((err) => {
-          console.log(err)
-        })
+    if (!email || !password) {
+        return
     }
+
+    dispatch(ActionCreators.login({ email, password }, check))
+    
   }
 
-  if(isConnected) {
-    return <User />
+
+  if (isConnected) {
+    return <Navigate to="/profile" />
   }
+
 
 
   return (
@@ -84,14 +89,16 @@ function Login() {
       <h1>Sign In</h1>
       <form >
         <div className="input-wrapper">
-          <label className="label" >Username</label><input className="input" type="text" id="username" onChange={e => setMail(e.target.value)} />
+          <label className="label" >Username</label><input className="input" type="mail" id="username" onChange={e => setMail(e.target.value)} />
         </div>
         <div className="input-wrapper">
           <label className="label" >Password</label><input className="input" type="password" id="password" onChange={e => setPassword(e.target.value)} />
         </div>
         <div className="input-remember">
-          <input className="input" type="checkbox" id="remember-me" /><label className="label" >Remember me</label>
+          <input className="input" type="checkbox" id="remember-me" onChange={e => setCheck(e.target.checked)} /><label className="label" >Remember me</label>
         </div>
+        {error ? <p className="input-error">Please enter a valid account.</p> : ''}
+
 
         <Link onClick={handleLogin} className="sign-in-button">Sign In</Link>
       </form>

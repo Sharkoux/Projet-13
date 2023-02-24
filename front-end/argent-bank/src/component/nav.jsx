@@ -1,6 +1,8 @@
 import { NavLink } from "react-router-dom"
 import React from "react"
 import styled from 'styled-components'
+import { useDispatch, useSelector } from "react-redux"
+import { ActionCreators } from "../actions/actionCreator"
 
 
 const MainNav = styled.nav`
@@ -37,8 +39,12 @@ const MainNav = styled.nav`
 
 
 function Nav() {
+    const dispatch = useDispatch()
+    const isConnected = useSelector(state => state.isConnected)
 
-    const user = localStorage.getItem("user")
+    const handleLogout = () => {
+        dispatch(ActionCreators.logout())
+    }
 
     return (
         <MainNav className="main-nav">
@@ -50,12 +56,12 @@ function Nav() {
                 />
                 <h1 className="sr-only">Argent Bank</h1>
             </NavLink>
-            {user ? <div>
-                <NavLink className="a main-nav-item" to='/login'>
+            {isConnected ? <div>
+                <NavLink className="a main-nav-item" to='/profile'>
                     <i className="fa fa-user-circle"></i>
                     Tony
                 </NavLink>
-                <NavLink className="a main-nav-item" href="./index.html">
+                <NavLink className="a main-nav-item" onClick={handleLogout}>
                     <i className="fa fa-sign-out"></i>
                     Sign Out
                 </NavLink>
