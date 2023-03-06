@@ -56,12 +56,13 @@ margin-bottom: 500px;
 
 function Login() {
 
+  const header = {"Content-Type": "application/json"}
   const [email, setMail] = useState("");
   const [password, setPassword] = useState("");
   const [check, setCheck] = useState(false)
 
-  const isConnected = useSelector(state => state.isConnected)
-  const error = useSelector(state => state.error)
+  const isConnected = useSelector(state => state.login.isConnected)
+  const error = useSelector(state => state.login.error)
 
 
   const dispatch = useDispatch()
@@ -72,7 +73,7 @@ function Login() {
         return
     }
 
-    dispatch(ActionCreators.login({ email, password }, check))
+    dispatch(ActionCreators.login(header, { email, password }, check))
     
   }
 

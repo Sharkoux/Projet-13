@@ -1,7 +1,9 @@
 import React from "react"
+import { useSelector, useDispatch } from "react-redux"
 import styled from 'styled-components'
+import { ActionCreators } from "../actions/actionCreator"
 import AccountItem from "../component/account-item"
-
+import { useState } from "react"
 
 const Header = styled.div`
     color: #fff;
@@ -17,14 +19,34 @@ const Header = styled.div`
 `
 
 function User() {
-
+    const [modal, setModal] = useState(false)
     const datatest = [{ title: 'Argent Bank Checking (x8349)', amount: '2,082.79' }, { title: 'Argent Bank Checking (x8349)', amount: '2,082.79' }, { title: 'Argent Bank Checking (x8349)', amount: '2,082.79' }]
+    const token = useSelector(state => state.login.token);
+    const firstName = useSelector(state => state.profil.profil.firstName)
+    const lastName = useSelector(state => state.profil.profil.lastName)
+    const dispatch = useDispatch()
+
+
+    if (token) {
+        const header = {
+            'accept': 'application/json',
+            'Authorization': `Bearer ${token}`
+        }
+        dispatch(ActionCreators.profil(header))
+
+    }
+
+
+    const EditModal = async () => {
+        setModal(true)
+    }
+
 
     return (
         <main className="main bg-dark">
             <Header>
-                <h1>Welcome back<br />Tony Jarvis!</h1>
-                <button className="edit-button">Edit Name</button>
+                <h1>Welcome back<br />{firstName} {lastName}!</h1>
+                <button className="edit-button" onClick={EditModal}>Edit Name</button>
             </Header>
 
             <h2 className="sr-only">Accounts</h2>
@@ -36,8 +58,16 @@ function User() {
 
         </main>
     )
- 
+
 
 }
 
-export default User
+
+
+export default User;
+
+
+
+
+
+

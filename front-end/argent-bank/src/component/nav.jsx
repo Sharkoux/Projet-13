@@ -40,8 +40,8 @@ const MainNav = styled.nav`
 
 function Nav() {
     const dispatch = useDispatch()
-    const isConnected = useSelector(state => state.isConnected)
-
+    const isConnected = useSelector(state => state.login.isConnected)
+    const firstName = useSelector(state => state.profil.profil.firstName)
     const handleLogout = () => {
         dispatch(ActionCreators.logout())
     }
@@ -59,7 +59,7 @@ function Nav() {
             {isConnected ? <div>
                 <NavLink className="a main-nav-item" to='/profile'>
                     <i className="fa fa-user-circle"></i>
-                    Tony
+                    {firstName}
                 </NavLink>
                 <NavLink className="a main-nav-item" onClick={handleLogout}>
                     <i className="fa fa-sign-out"></i>

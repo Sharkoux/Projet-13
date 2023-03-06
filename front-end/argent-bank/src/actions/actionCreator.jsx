@@ -1,14 +1,13 @@
 import { Types } from './actionTypes';
 import API from '../services/Api';
-import { useSelector } from 'react-redux';
+
 
 
 export const ActionCreators = {
-  login: (credentials, remember) => {
+  login: (header, credentials, remember) => {
     return async (dispatch) => {
       try {
-        
-        const response = await API.post('login', credentials);
+        const response = await API.post('login', header , credentials);
         const data = await response.json();
         const token = data.body.token;
         
@@ -27,20 +26,21 @@ export const ActionCreators = {
       localStorage.removeItem('token');
       return {type: Types.LOGOUT}
   },
-  callprofil: (token) => {
+  remember: () => {
+    return {type: Types.REMEMBER}
+  },
+  profil: (header) => {
     return async (dispatch) => {
       try {
-        const response = await API.post('profil', token);
+        const response = await API.post('profile', header);
         const data = await response.json();
-        dispatch({ type: Types.CALLPROFIL, payload: { data } });
+        const profilUser = data.body
+        dispatch({ type: Types.PROFIL, payload: { profilUser } });
       } catch (error) {
         // handle error
         console.log(error)
       }
     };
   },
-  remember: () => {
-    return {type: Types.REMEMBER}
-  }
 
 };

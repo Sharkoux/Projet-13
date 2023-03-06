@@ -29,13 +29,11 @@ class API {
     return await this.responseHandler(res)
   }
 
-  post = async (api, body) => {
+  post = async (api, headers, body) => {
     try {
       const res = fetch(`${this.baseApi}/${api}`, {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
+        headers: headers,
         body: JSON.stringify(body),
       })
       return res

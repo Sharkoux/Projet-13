@@ -1,7 +1,8 @@
 export const Types = {
     LOGIN: 'LOGIN',
     LOGOUT: 'LOGOUT',
-    UPDATE: 'UPDATE',
     REMEMBER: 'REMEMBER',
-    ERROR: 'ERROR'
+    ERROR: 'ERROR',
+    PROFIL: 'PROFIL',
+    UPDATE: 'UPDATE',
   }

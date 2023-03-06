@@ -1,6 +1,6 @@
-import Login from '../page/login';
+
 import { Types } from '../actions/actionTypes';
-import { ActionCreators } from '../actions/actionCreator';
+
 
 
 const token = localStorage.getItem("token")
@@ -8,7 +8,7 @@ const token = localStorage.getItem("token")
 
 const initialState = token
     ? {
-        token: token,
+        token: JSON.parse(token),
         error: false,
         isRemember: true,
         isConnected: true,
