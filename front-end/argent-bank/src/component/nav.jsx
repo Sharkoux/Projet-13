@@ -35,6 +35,9 @@ const MainNav = styled.nav`
         max-width: 100%;
         width: 200px;
       }
+      .fa {
+        padding-right: 7px;
+      }
 `
 
 
@@ -42,14 +45,14 @@ function Nav() {
     const dispatch = useDispatch()
     const isConnected = useSelector(state => state.login.isConnected)
     const data = localStorage.getItem("profil");
-  
+
     let firstName = useSelector(state => state.profil.profil.firstName)
 
 
-    if(data){
+    if (data) {
         firstName = JSON.parse(data).firstName
     }
-  
+
 
 
     const handleLogout = () => {
