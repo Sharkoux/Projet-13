@@ -6,8 +6,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { ActionCreators } from "../actions/actionCreator"
 import { connect } from 'react-redux';
 import { Navigate } from "react-router-dom"
-import User from "./user"
-import Signup from "./signup"
+
 
 const SignInContent = styled.section`
 box-sizing: border-box;
@@ -47,11 +46,6 @@ margin-bottom: 500px;
   .input-error {
     color: red
   }
-  .signUpbtn {
-    text-decoration: underline;
-    padding-left: 15px;
-    color: black;
-  }
 
 `
 
@@ -60,9 +54,9 @@ margin-bottom: 500px;
 
 
 
-function Login() {
+function SignUp() {
 
-  const header = { "Content-Type": "application/json" }
+  const header = {"Content-Type": "application/json"}
   const [email, setMail] = useState("");
   const [password, setPassword] = useState("");
   const [check, setCheck] = useState(false)
@@ -76,11 +70,11 @@ function Login() {
   const handleLogin = (e) => {
     e.preventDefault();
     if (!email || !password) {
-      return
+        return
     }
 
     dispatch(ActionCreators.login(header, { email, password }, check))
-
+    
   }
 
 
@@ -93,22 +87,23 @@ function Login() {
   return (
     <SignInContent>
       <i className="fa fa-user-circle sign-in-icon"></i>
-      <h1>Sign In</h1>
+      <h1>Sign Up</h1>
       <form >
         <div className="input-wrapper">
-          <label className="label" >Username</label><input className="input" type="mail" id="username" onChange={e => setMail(e.target.value)} />
+          <label className="label" >Email</label><input className="input" type="mail" id="username" onChange={e => setMail(e.target.value)} />
         </div>
         <div className="input-wrapper">
           <label className="label" >Password</label><input className="input" type="password" id="password" onChange={e => setPassword(e.target.value)} />
         </div>
-        <div className="input-remember">
-          <input className="input" type="checkbox" id="remember-me" onChange={e => setCheck(e.target.checked)} /><label className="label" >Remember me</label>
+        <div className="input-wrapper">
+          <label className="label" >FirstName</label><input className="input" type="mail" id="username" onChange={e => setMail(e.target.value)} />
         </div>
-        <Link className="signUpbtn" to={'/signup'}>SignUp</Link>
-        {error ? <p className="input-error">Please enter a valid account.</p> : ''}
+        <div className="input-wrapper">
+          <label className="label" >LastName</label><input className="input" type="mail" id="username" onChange={e => setMail(e.target.value)} />
+        </div>
 
 
-        <Link onClick={handleLogin} className="sign-in-button">Sign In</Link>
+        <Link onClick={handleLogin} className="sign-in-button">Sign Up</Link>
       </form>
     </SignInContent>
   )
@@ -124,4 +119,4 @@ const mapDispatchToProps = dispatch => ({
   }
 });
 
-export default connect(null, mapDispatchToProps)(Login);
+export default connect(null, mapDispatchToProps)(SignUp);

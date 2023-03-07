@@ -4,6 +4,7 @@ import Home from '../page/home'
 import Login from '../page/login'
 import User from '../page/user'
 import { PrivateRoute } from '../component/privateRoutes'
+import Signup from '../page/signup'
 
 
 
@@ -21,6 +22,11 @@ const router = createBrowserRouter([
             {
                 path: '/login',
                 element: <Login />,
+
+            },
+            {
+                path: '/signup',
+                element: <Signup />,
 
             },
             {

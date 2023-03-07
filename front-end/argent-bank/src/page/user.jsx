@@ -4,6 +4,8 @@ import styled from 'styled-components'
 import { ActionCreators } from "../actions/actionCreator"
 import AccountItem from "../component/account-item"
 import { useState } from "react"
+import ModalEdit from "../component/modal-name"
+
 
 const Header = styled.div`
     color: #fff;
@@ -22,33 +24,37 @@ function User() {
     const [modal, setModal] = useState(false)
     const datatest = [{ title: 'Argent Bank Checking (x8349)', amount: '2,082.79' }, { title: 'Argent Bank Checking (x8349)', amount: '2,082.79' }, { title: 'Argent Bank Checking (x8349)', amount: '2,082.79' }]
     const token = useSelector(state => state.login.token);
+    const check = useSelector(state => state.login.isRemember)
     const firstName = useSelector(state => state.profil.profil.firstName)
     const lastName = useSelector(state => state.profil.profil.lastName)
     const dispatch = useDispatch()
-
 
     if (token) {
         const header = {
             'accept': 'application/json',
             'Authorization': `Bearer ${token}`
         }
-        dispatch(ActionCreators.profil(header))
+        dispatch(ActionCreators.profil(header, check))
 
     }
 
 
-    const EditModal = async () => {
+    const editModal = async () => {
         setModal(true)
     }
-
+    const closeModal = async () => {
+        setModal(false)
+    }
+ 
+   
 
     return (
         <main className="main bg-dark">
             <Header>
                 <h1>Welcome back<br />{firstName} {lastName}!</h1>
-                <button className="edit-button" onClick={EditModal}>Edit Name</button>
+                <button className="edit-button" onClick={editModal}>Edit Name</button>
             </Header>
-
+            {modal ? <ModalEdit closeModal={closeModal} /> : <></>}
             <h2 className="sr-only">Accounts</h2>
             {datatest.map((item, index) => {
                 return (

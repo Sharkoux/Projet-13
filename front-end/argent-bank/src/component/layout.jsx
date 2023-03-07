@@ -23,8 +23,7 @@ html {
   
   .main {
     flex: 1;
-    height: 100%;
-    padding-bottom: 100px;
+    height: 100vh;
   }
   
   .bg-dark {

@@ -41,7 +41,17 @@ const MainNav = styled.nav`
 function Nav() {
     const dispatch = useDispatch()
     const isConnected = useSelector(state => state.login.isConnected)
-    const firstName = useSelector(state => state.profil.profil.firstName)
+    const data = localStorage.getItem("profil");
+  
+    let firstName = useSelector(state => state.profil.profil.firstName)
+
+
+    if(data){
+        firstName = JSON.parse(data).firstName
+    }
+  
+
+
     const handleLogout = () => {
         dispatch(ActionCreators.logout())
     }

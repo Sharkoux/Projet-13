@@ -8,7 +8,7 @@ import { Types } from '../actions/actionTypes';
 
 const initialState = {
     profil: {
-       
+
     }
 }
 
@@ -20,8 +20,12 @@ const reducer_user = (state = initialState, action) => {
                 ...state,
                 profil: action.payload.profilUser
             }
-       
-        
+        case Types.UPDATE:
+            return {
+                ...state,
+                profil: action.payload.profilUser
+            }
+
         default:
             return state;
     }
