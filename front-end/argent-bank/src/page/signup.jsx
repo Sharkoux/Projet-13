@@ -4,8 +4,7 @@ import styled from 'styled-components'
 import { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { ActionCreators } from "../actions/actionCreator"
-import { connect } from 'react-redux';
-import { Navigate } from "react-router-dom"
+
 
 
 const SignInContent = styled.section`
@@ -56,30 +55,30 @@ margin-bottom: 500px;
 
 function SignUp() {
 
-  const header = {"Content-Type": "application/json"}
+  const header = {
+    'accept': 'application/json',
+    "Content-Type": "application/json"
+  }
   const [email, setMail] = useState("");
   const [password, setPassword] = useState("");
-  const [check, setCheck] = useState(false)
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const messages = useSelector(state => state.profil.message)
 
-  const isConnected = useSelector(state => state.login.isConnected)
-  const error = useSelector(state => state.login.error)
-
+  const validEmail = new RegExp(
+    '^[a-zA-Z0-9._:$!%-]+@[a-zA-Z0-9.-]+.[a-zA-Z]$'
+  );
 
   const dispatch = useDispatch()
 
-  const handleLogin = (e) => {
+  const handleSignup = (e) => {
     e.preventDefault();
-    if (!email || !password) {
-        return
+    if (!email || !password || !firstName || !lastName || !validEmail.test(email)) {
+      return
     }
 
-    dispatch(ActionCreators.login(header, { email, password }, check))
-    
-  }
+    dispatch(ActionCreators.signup(header, { email, password, firstName, lastName }))
 
-
-  if (isConnected) {
-    return <Navigate to="/profile" />
   }
 
 
@@ -90,20 +89,20 @@ function SignUp() {
       <h1>Sign Up</h1>
       <form >
         <div className="input-wrapper">
-          <label className="label" >Email</label><input className="input" type="mail" id="username" onChange={e => setMail(e.target.value)} />
+          <label className="label" >Email</label><input className="input" type="mail" onChange={e => setMail(e.target.value)} />
         </div>
         <div className="input-wrapper">
-          <label className="label" >Password</label><input className="input" type="password" id="password" onChange={e => setPassword(e.target.value)} />
+          <label className="label" >Password</label><input className="input" type="password" onChange={e => setPassword(e.target.value)} />
         </div>
         <div className="input-wrapper">
-          <label className="label" >FirstName</label><input className="input" type="mail" id="username" onChange={e => setMail(e.target.value)} />
+          <label className="label" >FirstName</label><input className="input" type="text" onChange={e => setFirstName(e.target.value)} />
         </div>
         <div className="input-wrapper">
-          <label className="label" >LastName</label><input className="input" type="mail" id="username" onChange={e => setMail(e.target.value)} />
+          <label className="label" >LastName</label><input className="input" type="text" onChange={e => setLastName(e.target.value)} />
         </div>
+        <p>{messages}</p>
 
-
-        <Link onClick={handleLogin} className="sign-in-button">Sign Up</Link>
+        <Link onClick={handleSignup} className="sign-in-button">Sign Up</Link>
       </form>
     </SignInContent>
   )
@@ -113,10 +112,5 @@ function SignUp() {
 
 
 
-const mapDispatchToProps = dispatch => ({
-  login: (credentials) => {
-    dispatch(ActionCreators.login(credentials));
-  }
-});
 
-export default connect(null, mapDispatchToProps)(SignUp);
+export default SignUp;

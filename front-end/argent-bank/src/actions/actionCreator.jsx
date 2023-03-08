@@ -62,5 +62,21 @@ export const ActionCreators = {
         console.log(error)
       }
     };
+  },
+  signup: (header, body) => {
+    return async (dispatch) => {
+      try {
+        const response = await API.post('signup', header, body);
+        const data = await response.json();
+        console.log(data.message)
+        const message = data.message
+
+        dispatch({ type: Types.SIGNUP, payload: { message } });
+      } catch (error) {
+        // handle error
+        dispatch({ type: Types.ERROR })
+      }
+    }
   }
+
 };

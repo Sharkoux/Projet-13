@@ -9,7 +9,9 @@ import { Types } from '../actions/actionTypes';
 const initialState = {
     profil: {
 
-    }
+    },
+    error: null,
+    message: null
 }
 
 
@@ -24,6 +26,16 @@ const reducer_user = (state = initialState, action) => {
             return {
                 ...state,
                 profil: action.payload.profilUser
+            }
+        case Types.SIGNUP:
+            return {
+                ...state,
+                message: action.payload.message
+            }
+        case Types.ERROR:
+            return {
+                ...state,
+                error: true,
             }
 
         default:

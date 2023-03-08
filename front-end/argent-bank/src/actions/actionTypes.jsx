@@ -5,4 +5,6 @@ export const Types = {
     ERROR: 'ERROR',
     PROFIL: 'PROFIL',
     UPDATE: 'UPDATE',
+    MESSAGE: 'MESSAGE',
+    SIGNUP: 'SIGNUP'
   }

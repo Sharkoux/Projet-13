@@ -96,13 +96,13 @@ function Login() {
       <h1>Sign In</h1>
       <form >
         <div className="input-wrapper">
-          <label className="label" >Username</label><input className="input" type="mail" id="username" onChange={e => setMail(e.target.value)} />
+          <label className="label" >Username</label><input className="input" type="mail" onChange={e => setMail(e.target.value)} />
         </div>
         <div className="input-wrapper">
-          <label className="label" >Password</label><input className="input" type="password" id="password" onChange={e => setPassword(e.target.value)} />
+          <label className="label" >Password</label><input className="input" type="password" onChange={e => setPassword(e.target.value)} />
         </div>
         <div className="input-remember">
-          <input className="input" type="checkbox" id="remember-me" onChange={e => setCheck(e.target.checked)} /><label className="label" >Remember me</label>
+          <input className="input" type="checkbox" onChange={e => setCheck(e.target.checked)} /><label className="label" >Remember me</label>
         </div>
         <Link className="signUpbtn" to={'/signup'}>SignUp</Link>
         {error ? <p className="input-error">Please enter a valid account.</p> : ''}
