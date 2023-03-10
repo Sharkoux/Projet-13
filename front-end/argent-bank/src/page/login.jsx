@@ -1,13 +1,12 @@
 import { Link } from "react-router-dom"
 import React from "react"
 import styled from 'styled-components'
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { ActionCreators } from "../actions/actionCreator"
 import { connect } from 'react-redux';
 import { Navigate } from "react-router-dom"
-import User from "./user"
-import Signup from "./signup"
+
 
 const SignInContent = styled.section`
 box-sizing: border-box;
@@ -69,9 +68,19 @@ function Login() {
 
   const isConnected = useSelector(state => state.login.isConnected)
   const error = useSelector(state => state.login.error)
-
+  const asProfil = useSelector(state => state.profil.newUser)
 
   const dispatch = useDispatch()
+
+  
+  useEffect(() => {
+    if (asProfil) {
+      setMail(asProfil);
+    }
+  }, [asProfil]);
+
+
+
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -89,14 +98,13 @@ function Login() {
   }
 
 
-
   return (
     <SignInContent>
       <i className="fa fa-user-circle sign-in-icon"></i>
       <h1>Sign In</h1>
       <form >
         <div className="input-wrapper">
-          <label className="label" >Username</label><input className="input" type="mail" onChange={e => setMail(e.target.value)} />
+          <label className="label" >Username</label><input className="input" type="mail" value={email} onChange={e => setMail(e.target.value)} />
         </div>
         <div className="input-wrapper">
           <label className="label" >Password</label><input className="input" type="password" onChange={e => setPassword(e.target.value)} />

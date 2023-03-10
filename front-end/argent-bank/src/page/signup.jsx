@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { ActionCreators } from "../actions/actionCreator"
-
+import { Navigate } from "react-router-dom"
 
 
 const SignInContent = styled.section`
@@ -63,7 +63,9 @@ function SignUp() {
   const [password, setPassword] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
-  const messages = useSelector(state => state.profil.message)
+  const error = useSelector(state => state.profil.error)
+  const preprofil = useSelector(state => state.profil.newUser)
+  let messages;
 
   const validEmail = new RegExp(
     '^[a-zA-Z0-9._:$!%-]+@[a-zA-Z0-9.-]+.[a-zA-Z]$'
@@ -78,10 +80,17 @@ function SignUp() {
     }
 
     dispatch(ActionCreators.signup(header, { email, password, firstName, lastName }))
-
+   
   }
-
-
+  
+  if(error) {
+    messages = "Error: Wrong Email (Or already used). "
+  }
+ 
+  if(!error && preprofil) {
+      return <Navigate to="/login" />
+  }
+  
 
   return (
     <SignInContent>

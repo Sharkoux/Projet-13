@@ -10,8 +10,8 @@ const initialState = {
     profil: {
 
     },
-    error: null,
-    message: null
+    error: false,
+    newUser: "",
 }
 
 
@@ -30,12 +30,13 @@ const reducer_user = (state = initialState, action) => {
         case Types.SIGNUP:
             return {
                 ...state,
-                message: action.payload.message
+                error: false,
+                newUser: action.payload.profil.email
             }
         case Types.ERROR:
             return {
                 ...state,
-                error: true,
+                error: true
             }
 
         default:

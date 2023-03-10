@@ -1,6 +1,6 @@
 import { Types } from './actionTypes';
 import API from '../services/Api';
-
+import { Navigate } from 'react-router-dom';
 
 
 export const ActionCreators = {
@@ -67,13 +67,13 @@ export const ActionCreators = {
     return async (dispatch) => {
       try {
         const response = await API.post('signup', header, body);
-        const data = await response.json();
-        console.log(data.message)
+        const data = await response.json()
         const message = data.message
-
-        dispatch({ type: Types.SIGNUP, payload: { message } });
+        const profil = data.body
+        dispatch({ type: Types.SIGNUP, payload: { message, profil } });
       } catch (error) {
         // handle error
+
         dispatch({ type: Types.ERROR })
       }
     }
