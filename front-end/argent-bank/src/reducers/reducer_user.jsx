@@ -33,6 +33,11 @@ const reducer_user = (state = initialState, action) => {
                 error: false,
                 newUser: action.payload.profil.email
             }
+        case Types.LOGOUT: 
+            return {
+                ...state,
+                newUser: ""
+            }
         case Types.ERROR:
             return {
                 ...state,

@@ -1,9 +1,9 @@
-
+// Import component, hook
 import React from "react"
 import styled from 'styled-components'
 import FeatureItem from "../component/feature-item"
 
-
+// Rules css (styled-component) 
 const Hero = styled.div`
     background-image: url('/bank-tree.jpeg');
     background-position: 0 -50px;
@@ -67,9 +67,14 @@ const Features = styled.section`
   }
 `
 
+/**
+ * First Page Home 
+ * @return { ReactElement }
+ */
 
 function Home() {
 
+    // Array data for features map
     const featureData = [{
         src: '/icon-chat.png', title: 'You are our #1 priority',
         content: 'Need to talk to a representative? You can get in touch through our 24/7 chat or through a phone call in less than 5 minutes.'
@@ -81,7 +86,7 @@ function Home() {
     }
     ]
 
-
+    // Return Page Home component with first Section and generate Features presentation
     return (
         <div>
             <Hero>

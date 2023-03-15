@@ -1,3 +1,4 @@
+// Import component, hook
 import { Link } from "react-router-dom"
 import React from "react"
 import styled from 'styled-components'
@@ -8,6 +9,7 @@ import { connect } from 'react-redux';
 import { Navigate } from "react-router-dom"
 
 
+// Rules css (styled-component) 
 const SignInContent = styled.section`
 box-sizing: border-box;
 background-color: white;
@@ -56,23 +58,34 @@ margin-bottom: 500px;
 
 
 
+/**
+ * Page login with Form, and action redux for call service API 
+ * @return { ReactElement }
+ */
 
 
 
 function Login() {
 
+  // init header
   const header = { "Content-Type": "application/json" }
+  // state email / password 
   const [email, setMail] = useState("");
   const [password, setPassword] = useState("");
+  // state if checkbox Remember check or not
   const [check, setCheck] = useState(false)
 
+  // call data from store 
   const isConnected = useSelector(state => state.login.isConnected)
   const error = useSelector(state => state.login.error)
+
+  // state from store, if SignUP success
   const asProfil = useSelector(state => state.profil.newUser)
+
 
   const dispatch = useDispatch()
 
-  
+  // Email preload 
   useEffect(() => {
     if (asProfil) {
       setMail(asProfil);
@@ -81,18 +94,19 @@ function Login() {
 
 
 
-
+  // Fonction for Login
   const handleLogin = (e) => {
     e.preventDefault();
+
     if (!email || !password) {
       return
     }
-
+    // Use action Redux for login
     dispatch(ActionCreators.login(header, { email, password }, check))
 
   }
 
-
+  //if log success, auto navigate to profil page 
   if (isConnected) {
     return <Navigate to="/profile" />
   }

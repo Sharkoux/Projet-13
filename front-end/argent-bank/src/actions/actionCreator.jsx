@@ -1,6 +1,6 @@
 import { Types } from './actionTypes';
 import API from '../services/Api';
-import { Navigate } from 'react-router-dom';
+
 
 
 export const ActionCreators = {
@@ -51,7 +51,6 @@ export const ActionCreators = {
       try {
         const response = await API.put('profile', header, body);
         const data = await response.json();
-        console.log(data)
         const profilUser = data.body
         dispatch({ type: Types.UPDATE, payload: { profilUser } });
         if (remember) {

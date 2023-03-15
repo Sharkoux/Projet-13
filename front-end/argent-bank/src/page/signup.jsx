@@ -1,3 +1,4 @@
+// Import component and hook
 import { Link } from "react-router-dom"
 import React from "react"
 import styled from 'styled-components'
@@ -6,7 +7,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { ActionCreators } from "../actions/actionCreator"
 import { Navigate } from "react-router-dom"
 
-
+// Rules css (styled-component) 
 const SignInContent = styled.section`
 box-sizing: border-box;
 background-color: white;
@@ -52,41 +53,53 @@ margin-bottom: 500px;
 
 
 
+/**
+ * Page signup with Form, and action redux for call service API 
+ * @return { ReactElement }
+ */
+
+
 
 function SignUp() {
-
+  //init header data
   const header = {
     'accept': 'application/json',
     "Content-Type": "application/json"
   }
+  // init state for email, password, firstname, lastname
   const [email, setMail] = useState("");
   const [password, setPassword] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
+
+  // call data from store
   const error = useSelector(state => state.profil.error)
   const preprofil = useSelector(state => state.profil.newUser)
+
   let messages;
 
+  // Regex for valid email format
   const validEmail = new RegExp(
     '^[a-zA-Z0-9._:$!%-]+@[a-zA-Z0-9.-]+.[a-zA-Z]$'
   );
 
   const dispatch = useDispatch()
 
+  // Fonction for signup
   const handleSignup = (e) => {
     e.preventDefault();
     if (!email || !password || !firstName || !lastName || !validEmail.test(email)) {
       return
     }
-
+     // Use action Redux for signup
     dispatch(ActionCreators.signup(header, { email, password, firstName, lastName }))
    
   }
-  
+  // if error return msg 
   if(error) {
     messages = "Error: Wrong Email (Or already used). "
   }
- 
+  //if success and preprofil state exist, go to login page
   if(!error && preprofil) {
       return <Navigate to="/login" />
   }

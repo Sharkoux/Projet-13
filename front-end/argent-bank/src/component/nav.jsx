@@ -49,7 +49,7 @@ function Nav() {
     let firstName = useSelector(state => state.profil.profil.firstName)
 
 
-    if (data) {
+    if(data) {
         firstName = JSON.parse(data).firstName
     }
 

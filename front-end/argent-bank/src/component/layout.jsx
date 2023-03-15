@@ -2,7 +2,6 @@ import Nav from './nav'
 import Footer from './footer'
 import React from 'react'
 import { Outlet } from 'react-router-dom'
-import styled from 'styled-components'
 import { createGlobalStyle } from 'styled-components'
 
 const GlobalStyle = createGlobalStyle`
