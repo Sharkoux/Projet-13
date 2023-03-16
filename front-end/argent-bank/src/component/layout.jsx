@@ -4,6 +4,7 @@ import React from 'react'
 import { Outlet } from 'react-router-dom'
 import { createGlobalStyle } from 'styled-components'
 
+// global rules css (styled-component)
 const GlobalStyle = createGlobalStyle`
 html {
     font-family: Avenir, Helvetica, Arial, sans-serif;
@@ -43,6 +44,13 @@ html {
     white-space: nowrap !important; /* 3 */
   }
 `
+
+/**
+ * Uses the layout so that the Nav and the footer are present on all pages
+ * @param { ReactElement } children
+ * @return { ReactElement }
+ */
+
 
 const Layout = ({ children }) => {
   return (

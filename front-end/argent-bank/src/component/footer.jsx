@@ -2,6 +2,8 @@
 import React from "react"
 import styled from 'styled-components'
 
+
+// rules css (styled-component)
 const Footers = styled.footer`
   .footer {
     display: flex;
@@ -18,7 +20,7 @@ const Footers = styled.footer`
 `
 
 
-
+// Component Footer
 function Footer() {
 
 

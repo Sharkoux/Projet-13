@@ -1,11 +1,11 @@
-
+// import actionType
 import { Types } from '../actions/actionTypes';
 
 
 
 
 
-
+// init state
 const initialState = {
     profil: {
 
@@ -14,8 +14,9 @@ const initialState = {
     newUser: "",
 }
 
-
+// Use initialState by Default
 const reducer_user = (state = initialState, action) => {
+    //In response to the action, update state
     switch (action.type) {
         case Types.PROFIL:
             return {

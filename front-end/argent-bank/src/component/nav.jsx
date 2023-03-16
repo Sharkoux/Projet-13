@@ -1,10 +1,11 @@
+// import component and hook
 import { NavLink } from "react-router-dom"
 import React from "react"
 import styled from 'styled-components'
 import { useDispatch, useSelector } from "react-redux"
 import { ActionCreators } from "../actions/actionCreator"
 
-
+// Rules css (styled-component)
 const MainNav = styled.nav`
     display: flex;
     justify-content: space-between;
@@ -40,22 +41,29 @@ const MainNav = styled.nav`
       }
 `
 
+/**
+ * Composent Navigation
+ * @return { ReactElement }
+ */
 
 function Nav() {
     const dispatch = useDispatch()
+    // Retrieve state isConnected from store
     const isConnected = useSelector(state => state.login.isConnected)
+    // Retrieve profil from localstorage
     const data = localStorage.getItem("profil");
-
+    // Retrieve firstName from store
     let firstName = useSelector(state => state.profil.profil.firstName)
 
-
+    // if data from localsorage exist
     if(data) {
         firstName = JSON.parse(data).firstName
     }
 
 
-
+    //Fonction for logout 
     const handleLogout = () => {
+        // Use action Redux for logout
         dispatch(ActionCreators.logout())
     }
 

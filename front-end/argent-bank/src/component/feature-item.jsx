@@ -2,6 +2,7 @@
 import React from "react"
 import styled from 'styled-components'
 
+//rules css (styled-component)
 const FeatureItems = styled.div`
     flex: 1;
     padding: 2.5rem;

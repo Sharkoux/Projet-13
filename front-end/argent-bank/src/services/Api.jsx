@@ -1,7 +1,7 @@
 
 /**
  * @class
- * @classdesc Create class for call API (get/post/patch/delete)
+ * @classdesc Create class for call API (get/post/put/patch/delete)
  */
 
 class API {
@@ -9,7 +9,7 @@ class API {
     this.baseApi = 'http://localhost:3001/api/v1/user'
   }
 
-  // a corriger plus tard
+
   responseHandler = async res => {
     const response = await res.json()
     if (res.status >= 200 && res.status <= 300) {
@@ -80,5 +80,6 @@ class API {
   }
 }
 
+const api = new API()
 
-export default new API();
+export default api;

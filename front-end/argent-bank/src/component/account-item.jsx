@@ -2,6 +2,7 @@
 import React from "react"
 import styled from 'styled-components'
 
+// rules css (styled-component)
 const AccountSection = styled.section`
 display: flex;
 justify-content: space-between;
@@ -63,23 +64,23 @@ margin-bottom: 2rem;
 
 
 
-
+// Simple component to format user information
 
 function AccountItem({ data }) {
 
 
-    return (
-        <AccountSection>
-            <div className="account-content-wrapper">
-                <h3 className="account-title">{data.title}</h3>
-                <p className="account-amount">{data.amount}</p>
-                <p className="account-amount-description">Available Balance</p>
-            </div>
-            <div className="account-content-wrapper cta">
-                <button className="transaction-button">View transactions</button>
-            </div>
-        </AccountSection>
-    )
+  return (
+    <AccountSection>
+      <div className="account-content-wrapper">
+        <h3 className="account-title">{data.title}</h3>
+        <p className="account-amount">{data.amount}</p>
+        <p className="account-amount-description">Available Balance</p>
+      </div>
+      <div className="account-content-wrapper cta">
+        <button className="transaction-button">View transactions</button>
+      </div>
+    </AccountSection>
+  )
 }
 
 export default AccountItem

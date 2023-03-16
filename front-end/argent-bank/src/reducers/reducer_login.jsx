@@ -1,11 +1,11 @@
-
+// import actionType
 import { Types } from '../actions/actionTypes';
 
 
-
+// if token 
 const token = localStorage.getItem("token")
 
-
+// init state
 const initialState = token
     ? {
         token: JSON.parse(token),
@@ -20,8 +20,9 @@ const initialState = token
         isConnected: false,
     };
 
-
+// Use initialState by Default
 const reducer_login = (state = initialState, action) => {
+    //In response to the action, update state
     switch (action.type) {
         case Types.LOGIN:
             return {

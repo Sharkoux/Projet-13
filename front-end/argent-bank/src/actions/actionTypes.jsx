@@ -1,3 +1,5 @@
+
+// export def types Redux
 export const Types = {
     LOGIN: 'LOGIN',
     LOGOUT: 'LOGOUT',
@@ -5,6 +7,5 @@ export const Types = {
     ERROR: 'ERROR',
     PROFIL: 'PROFIL',
     UPDATE: 'UPDATE',
-    MESSAGE: 'MESSAGE',
     SIGNUP: 'SIGNUP'
   }

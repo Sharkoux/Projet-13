@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import { ActionCreators } from '../actions/actionCreator'
 import { useSelector } from 'react-redux'
 
+// rules css (styled-component)
 const Header = styled.div`
     color: #fff;
     margin-bottom: 2rem; 
@@ -36,35 +37,40 @@ const Header = styled.div`
     }
     
 `
-
+//Component for edit data Profil
 
 function EditName() {
+    // init state 
     const [editNames, setEditName] = useState(false)
     const [firstName, setFirstName] = useState("")
     const [lastName, setLastName] = useState("")
+    // call data from store
     const token = useSelector(state => state.login.token);
     const check = useSelector(state => state.login.isRemember)
     const firstNames = useSelector(state => state.profil.profil.firstName)
     const lastNames = useSelector(state => state.profil.profil.lastName)
+
     const dispatch = useDispatch()
 
 
-
+    // open/close editName interface
     const editName = () => {
         setEditName(prevState => !prevState)
     }
 
+    //function for edit data (firstname/lastname)
     const handleUpdateProfil = (e) => {
         e.preventDefault();
         if (!firstName || !lastName) {
             return
         }
-
+        // init header with token access
         const header = {
             'accept': 'application/json',
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`
         }
+        // Use action from redux for update
         dispatch(ActionCreators.update(header, { firstName, lastName }, check))
         editName()
     }
